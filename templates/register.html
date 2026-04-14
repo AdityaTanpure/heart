@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MurmurDetect</title>
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-panel: #1f2937;
+            --bg-input: #374151;
+            --border-color: #374151;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-pink: #ff4d6d;
+            --accent-orange: #f97316;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+        .navbar {
+            background-color: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+        }
+        .nav-brand {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            margin-left: 20px;
+        }
+        .nav-links a:hover { color: white; }
+
+        /* ---------------- AUTH LAYOUT ---------------- */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .auth-box {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .auth-box h2 {
+            margin-top: 0;
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .auth-box p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* ---------------- FORM INPUTS ---------------- */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: white;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+        }
+        input::placeholder { color: #6b7280; }
+        
+        /* Grid for side-by-side inputs */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* ---------------- BUTTONS & LINKS ---------------- */
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.3);
+        }
+        .link-text {
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .link-text a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link-text a:hover { text-decoration: underline; }
+        
+        .error {
+            background-color: rgba(255, 77, 109, 0.1);
+            border: 1px solid var(--accent-pink);
+            color: var(--accent-pink);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/home" class="nav-brand">❤️ Murmur Detect</a>
+        <div class="nav-links">
+            <a href="/home">← Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Create Account</h2>
+            <p>Join the MurmurDetect medical platform today.</p>
+            
+            <form method="POST">
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" name="full_name" placeholder="Dr. Jane Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Role / Profession</label>
+                        <select name="role" required>
+                            <option value="" disabled selected>Select Role...</option>
+                            <option value="Cardiologist">Cardiologist</option>
+                            <option value="General Practitioner">General Practitioner</option>
+                            <option value="Medical Student">Medical Student</option>
+                            <option value="Researcher">Researcher</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="jane@hospital.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Choose a Username</label>
+                    <input type="text" name="username" placeholder="e.g. jane_doe_2026" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Choose a Password</label>
+                    <input type="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit">Create Account</button>
+            </form>
+
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <div class="link-text">
+                Already have an account? <a href="/login">Log in here</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

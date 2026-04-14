@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Heart Murmur System</title>
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-panel: #1f2937;
+            --border-color: #374151;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-pink: #ff4d6d;
+            --accent-orange: #f97316;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---------------- NAVBAR STYLES ---------------- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+        }
+        .nav-brand {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-pink);
+        }
+        .nav-user {
+            color: var(--text-main);
+            font-weight: bold;
+            border-left: 1px solid var(--border-color);
+            padding-left: 20px;
+        }
+        .btn-nav-launch {
+            background-color: var(--accent-pink);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .btn-nav-launch:hover {
+            background-color: #e63950;
+            transform: scale(1.05);
+        }
+        .btn-outline {
+            border: 1px solid var(--accent-pink);
+            color: var(--accent-pink) !important;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.2s;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .btn-outline:hover {
+            background-color: rgba(255, 77, 109, 0.1);
+        }
+
+        /* ---------------- LAYOUT & SECTIONS ---------------- */
+        .container { max-width: 1050px; margin: 0 auto; padding: 40px 20px; }
+        section { padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        section:last-child { border-bottom: none; }
+        .section-title { font-size: 28px; margin-bottom: 20px; color: white; text-align: center; }
+
+        /* ---------------- HERO / HOME SECTION ---------------- */
+        .hero { text-align: center; padding: 60px 0 40px 0; }
+        .hero h1 { font-size: 42px; margin-bottom: 20px; background: linear-gradient(90deg, #ff4d6d, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-muted); font-size: 18px; line-height: 1.6; max-width: 750px; margin: 0 auto 40px auto; }
+
+        /* ---------------- THE PROJECT SECTION ---------------- */
+        .project-highlight-box { display: flex; align-items: center; gap: 40px; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 12px; padding: 40px; }
+        .project-text { flex: 1; }
+        .project-text h2 { color: white; margin-top: 0; font-size: 32px; margin-bottom: 20px; }
+        .project-text p { color: var(--text-muted); font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
+        .project-stats { flex: 1; background: rgba(0,0,0,0.3); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .project-stats h3 { color: var(--accent-orange); margin-top: 0; margin-bottom: 20px; font-size: 20px; }
+        .project-stats ul { color: var(--text-main); line-height: 2; padding-left: 20px; margin: 0; font-size: 15px;}
+        .project-stats li strong { color: white; }
+
+        /* ---------------- INFO GRIDS ---------------- */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 40px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
+        .info-card { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
+        .info-card:hover { transform: translateY(-5px); border-color: rgba(255, 77, 109, 0.4); }
+        .info-card h3 { margin-top: 0; color: var(--accent-orange); font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .info-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin: 0; }
+
+        /* ---------------- TEAM SECTION ---------------- */
+        .team-box { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 12px; padding: 40px; text-align: center; }
+        .team-names { font-size: 18px; font-weight: bold; color: white; line-height: 1.8; margin-bottom: 30px; }
+        .college-info { font-size: 14px; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; }
+
+        footer { text-align: center; padding: 30px; background-color: rgba(0,0,0,0.3); color: var(--text-muted); font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#home" class="nav-brand">❤️ Murmur Detect</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#project">The Project</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#team">Our Team</a>
+            
+            {% if session.get('logged_in') %}
+                <span class="nav-user">👤 {{ session.get('user') }}</span>
+                <a href="/logout" style="margin-left: 15px; color: var(--accent-pink); font-weight: bold; text-decoration: none;">Logout</a>
+            {% else %}
+                <div style="margin-left: 15px; border-left: 1px solid var(--border-color); padding-left: 20px;">
+                    <a href="/login" class="btn-nav-launch">Log In</a>
+                    <a href="/register" class="btn-outline">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <section id="home" class="hero">
+            <h1>Heart Murmur Detection System</h1>
+            <p>An advanced, non-invasive diagnostic tool that analyzes Phonocardiogram (PCG) audio signals to accurately detect and classify heart murmurs using Machine Learning and Deep Learning architectures.</p>
+        </section>
+
+        <section id="project">
+            <div class="project-highlight-box">
+                <div class="project-text">
+                    <h2>Pioneering Heart Health with AI</h2>
+                    <p>This system is developed as a dedicated academic project by the Electronics & Telecommunication Engineering department. Our goal is to bridge the gap between traditional stethoscope auscultation and modern artificial intelligence.</p>
+                    <p>By extracting Mel-Frequency Cepstral Coefficients (MFCCs) and training robust classification models, we have created a pipeline that assists in diagnosing cardiovascular abnormalities efficiently.</p>
+                    <br>
+                    
+                    {% if session.get('logged_in') %}
+                        <a href="/dashboard" class="btn-nav-launch" style="padding: 12px 30px; font-size: 16px;">Go to ML Model ➔</a>
+                    {% else %}
+                        <a href="/login" class="btn-nav-launch" style="padding: 12px 30px; font-size: 16px;">Log in to use Model ➔</a>
+                    {% endif %}
+                </div>
+                <div class="project-stats">
+                    <h3>Project Highlights</h3>
+                    <ul>
+                        <li><strong>Domain:</strong> Machine Learning & Signal Processing</li>
+                        <li><strong>Input Data:</strong> .WAV Audio Files (AV, MV, PV, TV)</li>
+                        <li><strong>Visuals:</strong> Librosa Mel-Spectrograms</li>
+                        <li><strong>Models:</strong> CNN (Deep Learning) & Random Forest</li>
+                        <li><strong>Tech Stack:</strong> Python, Flask, TensorFlow, Scikit-Learn</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2 class="section-title">Our System Services</h2>
+            <div class="grid-3">
+                <div class="info-card">
+                    <h3>🩺 Instant PCG Analysis</h3>
+                    <p>Upload your patients' phonocardiogram audio files and receive an instant, highly accurate murmur detection analysis powered by our trained CNN and Random Forest models.</p>
+                </div>
+                <div class="info-card">
+                    <h3>📊 Visual Spectrograms</h3>
+                    <p>Our system doesn't just give a text result. It generates and displays beautiful, high-resolution Mel-spectrograms so you can visually inspect the acoustic properties of the heart valves.</p>
+                </div>
+                <div class="info-card">
+                    <h3>💾 Diagnostic History</h3>
+                    <p>Keep track of your medical data securely. Every prediction you run is timestamped and saved into your personalized database dashboard for easy future reference and patient tracking.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">Why This Project Matters</h2>
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3>What is a Heart Murmur?</h3>
+                    <p>A heart murmur is an abnormal sound heard during a heartbeat, often sounding like a "whooshing" or "swishing." While some are harmless, others can indicate serious underlying structural heart conditions, such as valve stenosis or regurgitation.</p>
+                </div>
+                <div class="info-card">
+                    <h3>What is a Phonocardiogram (PCG)?</h3>
+                    <p>A PCG is a high-fidelity digital recording of the acoustic sounds made by the heart. By capturing audio from the four main auscultation areas (Aortic, Mitral, Pulmonary, Tricuspid), our models can visually and mathematically isolate abnormalities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works">
+            <h2 class="section-title">How The ML Pipeline Works</h2>
+            <div class="grid-3">
+                <div class="info-card">
+                    <h3>1. Audio Upload</h3>
+                    <p>Physicians or users upload .wav audio recordings captured via a digital stethoscope from the four primary valves. The browser generates a real-time interactive waveform.</p>
+                </div>
+                <div class="info-card">
+                    <h3>2. Feature Extraction</h3>
+                    <p>The Python backend utilizes the Librosa library to convert the raw audio into Mel-Frequency Cepstral Coefficients (MFCCs) and generates high-resolution spectrograms.</p>
+                </div>
+                <div class="info-card">
+                    <h3>3. ML Classification</h3>
+                    <p>The extracted data is fed into either our Random Forest Algorithm (84.6% Accuracy) or our Convolutional Neural Network (88.9% Accuracy) to provide an instant diagnosis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team">
+            <h2 class="section-title">Team Details</h2>
+            <div class="team-box">
+                <div style="color: var(--accent-orange); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Developed By</div>
+                <div class="team-names">
+                    Aditya Tanpure<br>
+                    Tejal Raut<br>
+                    Shivani Sarade
+                </div>
+                <div style="color: var(--text-muted); margin-bottom: 25px;">
+                    <strong>Project Guide:</strong> Dr. Parshuram Arotale
+                </div>
+                <div class="college-info">
+                    <strong>Department of Electronics & Telecommunication Engineering</strong><br>
+                    Vidya Pratishthan's Kamalnayan Bajaj Institute of Engineering and Technology, Baramati<br>
+                    Academic Year 2025–2026
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 Heart Murmur Detection System | Powered by Python, Flask, Librosa, TensorFlow, and Scikit-Learn.
+    </footer>
+
+</body>
+</html>
